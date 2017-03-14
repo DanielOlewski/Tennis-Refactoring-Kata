@@ -3,61 +3,44 @@ using NUnit.Framework;
 
 namespace Tennis
 {
-    [TestFixture( 0,  0, "Love-All")]
-    [TestFixture( 1,  1, "Fifteen-All")]
-    [TestFixture( 2,  2, "Thirty-All")]
-    [TestFixture( 3,  3, "Deuce")]
-    [TestFixture( 4,  4, "Deuce")]
-    [TestFixture( 1,  0, "Fifteen-Love")]
-    [TestFixture( 0,  1, "Love-Fifteen")]
-    [TestFixture( 2,  0, "Thirty-Love")]
-    [TestFixture( 0,  2, "Love-Thirty")]
-    [TestFixture( 3,  0, "Forty-Love")]
-    [TestFixture( 0,  3, "Love-Forty")]
-    [TestFixture( 4,  0, "Win for player-A")]
-    [TestFixture( 0,  4, "Win for player-B")]
-    [TestFixture( 2,  1, "Thirty-Fifteen")]
-    [TestFixture( 1,  2, "Fifteen-Thirty")]
-    [TestFixture( 3,  1, "Forty-Fifteen")]
-    [TestFixture( 1,  3, "Fifteen-Forty")]
-    [TestFixture( 4,  1, "Win for player-A")]
-    [TestFixture( 1,  4, "Win for player-B")]
-    [TestFixture( 3,  2, "Forty-Thirty")]
-    [TestFixture( 2,  3, "Thirty-Forty")]
-    [TestFixture( 4,  2, "Win for player-A")]
-    [TestFixture( 2,  4, "Win for player-B")]
-    [TestFixture( 4,  3, "Advantage player-A")]
-    [TestFixture( 3,  4, "Advantage player-B")]
-    [TestFixture( 5,  4, "Advantage player-A")]
-    [TestFixture( 4,  5, "Advantage player-B")]
-    [TestFixture(15, 14, "Advantage player-A")]
-    [TestFixture(14, 15, "Advantage player-B")]
-    [TestFixture( 6,  4, "Win for player-A")]
-    [TestFixture( 4,  6, "Win for player-B")]
-    [TestFixture(16, 14, "Win for player-A")]
-    [TestFixture(14, 16, "Win for player-B")]
-    public class TennisTests
-    {
-        private readonly int player1Score;
-        private readonly int player2Score;
-        private readonly string expectedScore;
-
-        public TennisTests(int player1Score, int player2Score, string expectedScore)
-        {
-            this.player1Score = player1Score;
-            this.player2Score = player2Score;
-            this.expectedScore = expectedScore;
-        }
-
-        [Test]
-        public void CheckTennisGame1()
+	public class ScoringTennis
+	{
+		[TestCase(0, 0, "Love-All")]
+		[TestCase(1, 1, "Fifteen-All")]
+		[TestCase(2, 2, "Thirty-All")]
+		[TestCase(3, 3, "Deuce")]
+		[TestCase(4, 4, "Deuce")]
+		[TestCase(1, 0, "Fifteen-Love")]
+		[TestCase(0, 1, "Love-Fifteen")]
+		[TestCase(2, 0, "Thirty-Love")]
+		[TestCase(0, 2, "Love-Thirty")]
+		[TestCase(3, 0, "Forty-Love")]
+		[TestCase(0, 3, "Love-Forty")]
+		[TestCase(4, 0, "Win for player-A")]
+		[TestCase(0, 4, "Win for player-B")]
+		[TestCase(2, 1, "Thirty-Fifteen")]
+		[TestCase(1, 2, "Fifteen-Thirty")]
+		[TestCase(3, 1, "Forty-Fifteen")]
+		[TestCase(1, 3, "Fifteen-Forty")]
+		[TestCase(4, 1, "Win for player-A")]
+		[TestCase(1, 4, "Win for player-B")]
+		[TestCase(3, 2, "Forty-Thirty")]
+		[TestCase(2, 3, "Thirty-Forty")]
+		[TestCase(4, 2, "Win for player-A")]
+		[TestCase(2, 4, "Win for player-B")]
+		[TestCase(4, 3, "Advantage player-A")]
+		[TestCase(3, 4, "Advantage player-B")]
+		[TestCase(5, 4, "Advantage player-A")]
+		[TestCase(4, 5, "Advantage player-B")]
+		[TestCase(15, 14, "Advantage player-A")]
+		[TestCase(14, 15, "Advantage player-B")]
+		[TestCase(6, 4, "Win for player-A")]
+		[TestCase(4, 6, "Win for player-B")]
+		[TestCase(16, 14, "Win for player-A")]
+		[TestCase(14, 16, "Win for player-B")]
+		public void ShowsExpectedDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
         {
             var game = new TennisGame1("player-A", "player-B");
-            CheckAllScores(game);
-        }
-
-        private void CheckAllScores(ITennisGame game)
-        {
             var highestScore = Math.Max(player1Score, player2Score);
             for (var i = 0; i < highestScore; i++)
             {
@@ -66,7 +49,7 @@ namespace Tennis
                 if (i < player2Score)
                     game.WonPoint("player-B");
             }
-            Assert.AreEqual(expectedScore, game.GetScore());
+            Assert.AreEqual(expectedDisplayScore, game.GetScore());
         }
 
     }
@@ -78,16 +61,12 @@ namespace Tennis
         public void CheckGame1()
         {
             var game = new TennisGame1("player-A", "player-B"); 
-            RealisticTennisGame(game);
-        }
-
-        private void RealisticTennisGame(ITennisGame game)
-        {
-            string[] points = { "player-A", "player-A", "player-B", "player-B", "player-A", "player-A" };
+            string[] ballWonSequence = { "player-A", "player-A", "player-B", "player-B", "player-A", "player-A" };
             string[] expectedScores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for player-A" };
+
             for (var i = 0; i < expectedScores.Length; i++)
             {
-                game.WonPoint(points[i]);
+                game.WonPoint(ballWonSequence[i]);
                 Assert.AreEqual(expectedScores[i], game.GetScore());
             }
         }
