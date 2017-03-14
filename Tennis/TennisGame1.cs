@@ -1,13 +1,12 @@
 namespace Tennis
 {
-	internal class TennisGame1 : ITennisGame
+	internal class TennisGame1
     {
-        private int m_score1;
-        private int m_score2;
         private readonly string player1Name;
         private readonly string player2Name;
+	    private readonly RawScore rawScore = new RawScore();
 
-        public TennisGame1(string player1Name, string player2Name)
+	    public TennisGame1(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
 	        this.player2Name = player2Name;
@@ -16,17 +15,22 @@ namespace Tennis
         public void WonPoint(string playerName)
         {
             if (playerName == player1Name)
-                m_score1 += 1;
+                rawScore.Player1Scores();
             else
-                m_score2 += 1;
+                rawScore.Player2Scores();
         }
 
-        public string GetScore()
+	    public string GetScore()
+	    {
+		    return GetScore(rawScore, player1Name, player2Name);
+	    }
+
+		public static string GetScore(RawScore rawScore, string player1Name, string player2Name)
         {
             var score = "";
-	        if (m_score1 == m_score2)
+	        if (rawScore.Player1Score == rawScore.Player2Score)
             {
-                switch (m_score1)
+                switch (rawScore.Player1Score)
                 {
                     case 0:
                         score = "Love-All";
@@ -43,9 +47,9 @@ namespace Tennis
 
                 }
             }
-            else if (m_score1 >= 4 || m_score2 >= 4)
+            else if (rawScore.Player1Score >= 4 || rawScore.Player2Score >= 4)
 	        {
-		        var minusResult = m_score1 - m_score2;
+		        var minusResult = (int)rawScore.Player1Score - (int)rawScore.Player2Score;
 		        switch (minusResult)
 		        {
 			        case 1:
@@ -63,9 +67,9 @@ namespace Tennis
             {
                 for (var i = 1; i < 3; i++)
                 {
-	                int tempScore;
-	                if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
+	                uint tempScore;
+	                if (i == 1) tempScore = rawScore.Player1Score;
+                    else { score += "-"; tempScore = rawScore.Player2Score; }
 	                switch (tempScore)
 	                {
 		                case 0:
