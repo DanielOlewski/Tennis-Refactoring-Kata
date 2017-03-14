@@ -38,6 +38,8 @@ namespace Tennis.Tests
 		[TestCase(4, 6, "Win for player-B")]
 		[TestCase(16, 14, "Win for player-A")]
 		[TestCase(14, 16, "Win for player-B")]
+		[TestCase(14, 160, "Win for player-B")]
+		[TestCase(140, 16, "Win for player-A")]
 		public void RawScoreProducesDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
         {
 			var displayScore = DisplayScore.Render(new RawScore((uint)player1Score, (uint)player2Score), "player-A", "player-B");
