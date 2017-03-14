@@ -12,8 +12,8 @@ namespace Tennis.Tests
 
 			counter.Player1Scores();
 
-			counter.Player1Score.ShouldEqual<uint>(1);
-			counter.Player2Score.ShouldEqual<uint>(0);
+			counter.Player1BallsWon.ShouldEqual<uint>(1);
+			counter.Player2BallsWon.ShouldEqual<uint>(0);
 		}
 
 		[Test]
@@ -24,8 +24,8 @@ namespace Tennis.Tests
 			counter.Player1Scores();
 			counter.Player1Scores();
 
-			counter.Player1Score.ShouldEqual<uint>(2);
-			counter.Player2Score.ShouldEqual<uint>(0);
+			counter.Player1BallsWon.ShouldEqual<uint>(2);
+			counter.Player2BallsWon.ShouldEqual<uint>(0);
 		}
 
 		[Test]
@@ -39,8 +39,8 @@ namespace Tennis.Tests
 			counter.Player1Scores();
 
 
-			counter.Player1Score.ShouldEqual<uint>(3);
-			counter.Player2Score.ShouldEqual<uint>(1);
+			counter.Player1BallsWon.ShouldEqual<uint>(3);
+			counter.Player2BallsWon.ShouldEqual<uint>(1);
 		}
 
 		[Test]
@@ -50,8 +50,8 @@ namespace Tennis.Tests
 
 			counter.Player1Scores();
 
-			counter.Player1Score.ShouldEqual<uint>(3);
-			counter.Player2Score.ShouldEqual<uint>(5);
+			counter.Player1BallsWon.ShouldEqual<uint>(3);
+			counter.Player2BallsWon.ShouldEqual<uint>(5);
 		}
 	}
 }

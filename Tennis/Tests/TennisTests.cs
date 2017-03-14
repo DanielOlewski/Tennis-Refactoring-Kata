@@ -4,7 +4,7 @@ using Should;
 
 namespace Tennis.Tests
 {
-	public class ScoringTennis
+	public class MakingDisplayScore
 	{
 		[TestCase(0, 0, "Love-All")]
 		[TestCase(1, 1, "Fifteen-All")]
@@ -39,7 +39,7 @@ namespace Tennis.Tests
 		[TestCase(4, 6, "Win for player-B")]
 		[TestCase(16, 14, "Win for player-A")]
 		[TestCase(14, 16, "Win for player-B")]
-		public void ShowsExpectedDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
+		public void RawScoreProducesDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
         {
 			var displayScore = DisplayScore.Render(new RawScore((uint)player1Score, (uint)player2Score), "player-A", "player-B");
 
@@ -47,11 +47,10 @@ namespace Tennis.Tests
         }
     }
 
-    [TestFixture]
-    public class ExampleGameTennisTest
+    public class SimulatingRealGame
     {
         [Test]
-        public void CheckGame1()
+        public void BallsWonSequenceProducesCorrectDisplayScores()
         {
             var game = new TennisGame1("player-A", "player-B"); 
             string[] ballWonSequence = { "player-A", "player-A", "player-B", "player-B", "player-A", "player-A" };
