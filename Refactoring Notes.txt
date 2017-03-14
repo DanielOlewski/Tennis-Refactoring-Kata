@@ -1,0 +1,17 @@
+1. Decided to cleanup first: 
+	- R#
+	- removed unused Game2 and Game3
+	- simplified tests
+	- changed test data to see if any hardcoded values present + fixed
+	- used uint instead of int for ballsWon counter (guards against negative values)
+2. Noticed first test(s) only advance the game towards the desired state + then check the display score. Will want to decouple that.
+	a. Introduced RawScore, then DisplayScore.Render(…)
+3. Refactoring the long Render() + removing duplication. Goal: <5 lines max method length
+4. Realized that all code is <5 lines methods now.
+5. Small attempt at OCP : made Render() flexible to adding more naming rules in the future without changing the Render() logic
+	- wondering if it's worth creating a collection of Rule classes at this point ... ?
+6. Added tests for "continues playing after win established" (case accidentlly supported now)
+
+Reflections:
+- it was interesting to focus on an aspect like "<5 line methods"
+- size was great as an excercise + to compare to other solutions people went after
