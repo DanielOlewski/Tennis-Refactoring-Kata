@@ -13,37 +13,7 @@ namespace Tennis
 
 		private static string WhenNormalScore(RawScore rawScore)
 		{
-			var displayScore = "";
-			for (var i = 1; i < 3; i++)
-			{
-				uint tempScore;
-				if (i == 1)
-				{
-					tempScore = rawScore.Player1Score;
-				}
-				else
-				{
-					displayScore += "-";
-					tempScore = rawScore.Player2Score;
-				}
-
-				switch (tempScore)
-				{
-					case 0:
-						displayScore += "Love";
-						break;
-					case 1:
-						displayScore += "Fifteen";
-						break;
-					case 2:
-						displayScore += "Thirty";
-						break;
-					case 3:
-						displayScore += "Forty";
-						break;
-				}
-			}
-			return displayScore;
+			return LowScoreToTennisScoreName(rawScore.Player1Score) + "-" + LowScoreToTennisScoreName(rawScore.Player2Score);
 		}
 
 		private static string WhenWinBy2Mode(RawScore rawScore, string player1Name, string player2Name)
@@ -57,23 +27,12 @@ namespace Tennis
 
 		private static string WhenEqualScore(RawScore rawScore)
 		{
-			string displayScore;
-			switch (rawScore.Player1Score)
-			{
-				case 0:
-					displayScore = "Love-All";
-					break;
-				case 1:
-					displayScore = "Fifteen-All";
-					break;
-				case 2:
-					displayScore = "Thirty-All";
-					break;
-				default:
-					displayScore = "Deuce";
-					break;
-			}
-			return displayScore;
+			return rawScore.Player1Score > 2 ? "Deuce" : LowScoreToTennisScoreName(rawScore.Player1Score) + "-All";
+		}
+
+		private static string LowScoreToTennisScoreName(uint lowScore)
+		{
+			return new[] { "Love", "Fifteen", "Thirty", "Forty" }[lowScore];
 		}
 	}
 }
