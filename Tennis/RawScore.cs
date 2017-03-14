@@ -27,6 +27,6 @@
 
 
 		public bool PlayerScoresAreEqual => Player1Score == Player2Score;
-		public bool WinBy2Mode => Player1Score >= 4 || Player2Score >= 4;
+		public bool WinBy2Naming => Player1Score >= 4 || Player2Score >= 4;
 	}
 }
