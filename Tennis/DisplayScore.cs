@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
 	internal static class DisplayScore
@@ -46,21 +48,11 @@ namespace Tennis
 
 		private static string WhenWinBy2Mode(RawScore rawScore, string player1Name, string player2Name)
 		{
-			string displayScore;
-			var minusResult = (int) rawScore.Player1Score - (int) rawScore.Player2Score;
-			switch (minusResult)
-			{
-				case 1:
-					displayScore = $"Advantage {player1Name}";
-					break;
-				case -1:
-					displayScore = $"Advantage {player2Name}";
-					break;
-				default:
-					displayScore = minusResult >= 2 ? $"Win for {player1Name}" : $"Win for {player2Name}";
-					break;
-			}
-			return displayScore;
+			var scoreDifference = (int) rawScore.Player1Score - (int) rawScore.Player2Score;
+			var playerAhead = scoreDifference > 0 ? player1Name : player2Name;
+			var winOrAdvantageString = Math.Abs(scoreDifference) == 1 ? "Advantage " : "Win for ";
+
+			return winOrAdvantageString + playerAhead;
 		}
 
 		private static string WhenEqualScore(RawScore rawScore)
