@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using Should;
 
 namespace Tennis
 {
@@ -49,7 +50,7 @@ namespace Tennis
                 if (i < player2Score)
                     game.WonPoint("player-B");
             }
-            Assert.AreEqual(expectedDisplayScore, game.GetScore());
+            expectedDisplayScore.ShouldEqual(game.GetScore());
         }
 
     }
@@ -67,7 +68,7 @@ namespace Tennis
             for (var i = 0; i < expectedScores.Length; i++)
             {
                 game.WonPoint(ballWonSequence[i]);
-                Assert.AreEqual(expectedScores[i], game.GetScore());
+                expectedScores[i].ShouldEqual(game.GetScore());
             }
         }
     }
