@@ -7,16 +7,16 @@ namespace Tennis
 		public static string Render(RawScore rawScore, string player1Name, string player2Name)
 		{
 			return rawScore.PlayerScoresAreEqual
-				? WhenEqualScore(rawScore)
-				: (rawScore.WinBy2Mode ? WhenWinBy2Mode(rawScore, player1Name, player2Name) : WhenNormalScore(rawScore));
+				? NameEqualScore(rawScore)
+				: (rawScore.WinBy2Naming ? NameWinOrAdvantageScore(rawScore, player1Name, player2Name) : NameLowScore(rawScore));
 		}
 
-		private static string WhenNormalScore(RawScore rawScore)
+		private static string NameLowScore(RawScore rawScore)
 		{
 			return LowScoreToTennisScoreName(rawScore.Player1Score) + "-" + LowScoreToTennisScoreName(rawScore.Player2Score);
 		}
 
-		private static string WhenWinBy2Mode(RawScore rawScore, string player1Name, string player2Name)
+		private static string NameWinOrAdvantageScore(RawScore rawScore, string player1Name, string player2Name)
 		{
 			var scoreDifference = (int) rawScore.Player1Score - (int) rawScore.Player2Score;
 			var playerAhead = scoreDifference > 0 ? player1Name : player2Name;
@@ -25,7 +25,7 @@ namespace Tennis
 			return winOrAdvantageString + playerAhead;
 		}
 
-		private static string WhenEqualScore(RawScore rawScore)
+		private static string NameEqualScore(RawScore rawScore)
 		{
 			return rawScore.Player1Score > 2 ? "Deuce" : LowScoreToTennisScoreName(rawScore.Player1Score) + "-All";
 		}
