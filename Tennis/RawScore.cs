@@ -24,5 +24,9 @@
 
 		public uint Player1Score { get; private set;  }
 		public uint Player2Score { get; private set; }
+
+
+		public bool PlayerScoresAreEqual => Player1Score == Player2Score;
+		public bool WinBy2Mode => Player1Score >= 4 || Player2Score >= 4;
 	}
 }

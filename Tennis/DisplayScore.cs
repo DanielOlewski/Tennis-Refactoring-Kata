@@ -4,67 +4,84 @@ namespace Tennis
 	{
 		public static string Render(RawScore rawScore, string player1Name, string player2Name)
 		{
-			var score = "";
-			if (rawScore.Player1Score == rawScore.Player2Score)
+			return rawScore.PlayerScoresAreEqual
+				? WhenEqualScore(rawScore)
+				: (rawScore.WinBy2Mode ? WhenWinBy2Mode(rawScore, player1Name, player2Name) : WhenNormalScore(rawScore));
+		}
+
+		private static string WhenNormalScore(RawScore rawScore)
+		{
+			var displayScore = "";
+			for (var i = 1; i < 3; i++)
 			{
-				switch (rawScore.Player1Score)
+				uint tempScore;
+				if (i == 1)
+				{
+					tempScore = rawScore.Player1Score;
+				}
+				else
+				{
+					displayScore += "-";
+					tempScore = rawScore.Player2Score;
+				}
+
+				switch (tempScore)
 				{
 					case 0:
-						score = "Love-All";
+						displayScore += "Love";
 						break;
 					case 1:
-						score = "Fifteen-All";
+						displayScore += "Fifteen";
 						break;
 					case 2:
-						score = "Thirty-All";
+						displayScore += "Thirty";
 						break;
-					default:
-						score = "Deuce";
+					case 3:
+						displayScore += "Forty";
 						break;
+				}
+			}
+			return displayScore;
+		}
 
-				}
-			}
-			else if (rawScore.Player1Score >= 4 || rawScore.Player2Score >= 4)
+		private static string WhenWinBy2Mode(RawScore rawScore, string player1Name, string player2Name)
+		{
+			string displayScore;
+			var minusResult = (int) rawScore.Player1Score - (int) rawScore.Player2Score;
+			switch (minusResult)
 			{
-				var minusResult = (int)rawScore.Player1Score - (int)rawScore.Player2Score;
-				switch (minusResult)
-				{
-					case 1:
-						score = $"Advantage {player1Name}";
-						break;
-					case -1:
-						score = $"Advantage {player2Name}";
-						break;
-					default:
-						score = minusResult >= 2 ? $"Win for {player1Name}" : $"Win for {player2Name}";
-						break;
-				}
+				case 1:
+					displayScore = $"Advantage {player1Name}";
+					break;
+				case -1:
+					displayScore = $"Advantage {player2Name}";
+					break;
+				default:
+					displayScore = minusResult >= 2 ? $"Win for {player1Name}" : $"Win for {player2Name}";
+					break;
 			}
-			else
+			return displayScore;
+		}
+
+		private static string WhenEqualScore(RawScore rawScore)
+		{
+			string displayScore;
+			switch (rawScore.Player1Score)
 			{
-				for (var i = 1; i < 3; i++)
-				{
-					uint tempScore;
-					if (i == 1) tempScore = rawScore.Player1Score;
-					else { score += "-"; tempScore = rawScore.Player2Score; }
-					switch (tempScore)
-					{
-						case 0:
-							score += "Love";
-							break;
-						case 1:
-							score += "Fifteen";
-							break;
-						case 2:
-							score += "Thirty";
-							break;
-						case 3:
-							score += "Forty";
-							break;
-					}
-				}
+				case 0:
+					displayScore = "Love-All";
+					break;
+				case 1:
+					displayScore = "Fifteen-All";
+					break;
+				case 2:
+					displayScore = "Thirty-All";
+					break;
+				default:
+					displayScore = "Deuce";
+					break;
 			}
-			return score;
+			return displayScore;
 		}
 	}
 }
