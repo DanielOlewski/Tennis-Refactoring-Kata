@@ -77,7 +77,7 @@ namespace Tennis
         [Test]
         public void CheckGame1()
         {
-            var game = new TennisGame1("player-A", "player-B");
+            var game = new TennisGame1("player-A", "player-B"); 
             RealisticTennisGame(game);
         }
 
