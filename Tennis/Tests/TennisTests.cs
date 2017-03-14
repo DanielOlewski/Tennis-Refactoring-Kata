@@ -41,16 +41,9 @@ namespace Tennis.Tests
 		[TestCase(14, 16, "Win for player-B")]
 		public void ShowsExpectedDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
         {
-            var game = new TennisGame1("player-A", "player-B");
-            var highestScore = Math.Max(player1Score, player2Score);
-            for (var i = 0; i < highestScore; i++)
-            {
-                if (i < player1Score)
-                    game.WonPoint("player-A");
-                if (i < player2Score)
-                    game.WonPoint("player-B");
-            }
-            expectedDisplayScore.ShouldEqual(game.GetScore());
+			var displayScore = DisplayScore.Render(new RawScore((uint)player1Score, (uint)player2Score), "player-A", "player-B");
+
+			displayScore.ShouldEqual(expectedDisplayScore);
         }
     }
 

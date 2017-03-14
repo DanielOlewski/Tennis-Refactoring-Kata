@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ITennisGame.cs" />
     <Compile Include="RawScore.cs" />
     <Compile Include="Tests\RawScoreCounting.cs" />
     <Compile Include="TennisGame1.cs" />
