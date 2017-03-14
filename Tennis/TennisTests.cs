@@ -58,15 +58,15 @@ namespace Tennis
 
         private void CheckAllScores(ITennisGame game)
         {
-            var highestScore = Math.Max(this.player1Score, this.player2Score);
+            var highestScore = Math.Max(player1Score, player2Score);
             for (var i = 0; i < highestScore; i++)
             {
-                if (i < this.player1Score)
+                if (i < player1Score)
                     game.WonPoint("player-A");
-                if (i < this.player2Score)
+                if (i < player2Score)
                     game.WonPoint("player-B");
             }
-            Assert.AreEqual(this.expectedScore, game.GetScore());
+            Assert.AreEqual(expectedScore, game.GetScore());
         }
 
     }

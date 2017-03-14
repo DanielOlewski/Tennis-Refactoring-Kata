@@ -1,16 +1,17 @@
 namespace Tennis
 {
-    class TennisGame1 : ITennisGame
+	internal class TennisGame1 : ITennisGame
     {
-        private int m_score1 = 0;
-        private int m_score2 = 0;
+        private int m_score1;
+        private int m_score2;
         private readonly string player1Name;
         private readonly string player2Name;
 
         public TennisGame1(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
-            this.player2Name = player2Name;
+	        m_score2 = 0;
+	        this.player2Name = player2Name;
         }
 
         public void WonPoint(string playerName)
