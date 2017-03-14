@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using Should;
 
-namespace Tennis
+namespace Tennis.Tests
 {
 	public class ScoringTennis
 	{
@@ -52,7 +52,6 @@ namespace Tennis
             }
             expectedDisplayScore.ShouldEqual(game.GetScore());
         }
-
     }
 
     [TestFixture]
