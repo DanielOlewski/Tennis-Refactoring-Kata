@@ -4,15 +4,15 @@ namespace Tennis
 {
 	internal static class DisplayScore
 	{
-		public delegate string NamingRule();
+		public delegate string NamingRule(RawScore rawScore, string player1Name, string player2Name);
 
 		public static string Render(RawScore rawScore, string player1Name, string player2Name)
 		{
 			var namingRuleSequence = new NamingRule[]
 			{
-				() => NameEqualScore(rawScore),
-				() => NameWinOrAdvantageScore(rawScore, player1Name, player2Name),
-				() => NameLowScore(rawScore),
+				NameEqualScore,
+				NameWinOrAdvantageScore,
+				NameLowScore,
 			};
 			return Render(rawScore, player1Name, player2Name, namingRuleSequence);
 		}
@@ -30,14 +30,14 @@ namespace Tennis
 				throw new ArgumentException("Player names must be different!");
 			}
 
-			return RunRules(rules);
+			return RunRules(rawScore, player1Name, player2Name, rules);
 		}
 
-		private static string RunRules(NamingRule[] namingRuleSequence)
+		private static string RunRules(RawScore rawScore, string player1Name, string player2Name, NamingRule[] rules)
 		{
-			foreach (var namingRule in namingRuleSequence)
+			foreach (var namingRule in rules)
 			{
-				var namedScore = namingRule();
+				var namedScore = namingRule(rawScore, player1Name, player2Name);
 				if (namedScore != null)
 					return namedScore;
 			}
@@ -45,7 +45,7 @@ namespace Tennis
 			return "<Unknown score>";
 		}
 
-		private static string NameLowScore(RawScore rawScore)
+		private static string NameLowScore(RawScore rawScore, string player1Name, string player2Name)
 		{
 			return LowScoreToTennisScoreName(rawScore.Player1BallsWon) + "-" + LowScoreToTennisScoreName(rawScore.Player2BallsWon);
 		}
@@ -61,7 +61,7 @@ namespace Tennis
 			return winOrAdvantageString + playerAhead;
 		}
 
-		private static string NameEqualScore(RawScore rawScore)
+		private static string NameEqualScore(RawScore rawScore, string player1Name, string player2Name)
 		{
 			return rawScore.PlayerScoresAreEqual ? (rawScore.Player1BallsWon > 2 ? "Deuce" : LowScoreToTennisScoreName(rawScore.Player1BallsWon) + "-All") : null;
 		}

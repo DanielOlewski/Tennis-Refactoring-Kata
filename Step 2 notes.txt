@@ -5,4 +5,7 @@
 	Discovered a few good missed cases (same player name, unknown player, invalid/empty/null player name).
 	Added UTs & validation for player names passed in to the constructor & to the methods. 
 	Realizing this is a candidate to decouple into Player class: would mean the validation could move there. Didn't see value in that before, bu tnow I do. Essentially WholeValue pattern. 
-4. 
+4. DisplayScore - UTs for validation, then for rendering, covered one missing case I couldn't get to before (unknown score).
+	Had to enable passing in an array of rules into the DisplayScore.Render() so that I can pass in test rules.
+5. Testing of individual rules - was unable to do that directly as they were all hidden as private methods. 
+	Realized sets of rules can be independent of the DisplayScore class -> decoupled. 

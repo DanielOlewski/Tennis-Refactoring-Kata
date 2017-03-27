@@ -37,7 +37,7 @@ namespace Tennis.Tests
 		[Test]
 		public void SingleRuleEvaluated()
 		{
-			DisplayScore.NamingRule r1 = () => "r1";
+			DisplayScore.NamingRule r1 = (rawScore, p1, p2) => "r1";
 
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, new [] { r1 });
 
@@ -49,8 +49,8 @@ namespace Tennis.Tests
 		{
 			var namingRules = new DisplayScore.NamingRule[]
 			{
-				() => "r1",
-				() => "r2"
+				(rawScore, p1, p2) => "r1",
+				(rawScore, p1, p2) => "r2"
 			};
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
 
@@ -62,8 +62,8 @@ namespace Tennis.Tests
 		{
 			var namingRules = new DisplayScore.NamingRule[]
 			{
-				() => null,
-				() => "r2"
+				(rawScore, p1, p2) => null,
+				(rawScore, p1, p2) => "r2"
 			};
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
 
@@ -75,10 +75,10 @@ namespace Tennis.Tests
 		{
 			var namingRules = new DisplayScore.NamingRule[]
 			{
-				() => null,
-				() => null,
-				() => null,
-				() => "r2"
+				(rawScore, p1, p2) => null,
+				(rawScore, p1, p2) => null,
+				(rawScore, p1, p2) => null,
+				(rawScore, p1, p2) => "r2"
 			};
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
 
@@ -90,8 +90,8 @@ namespace Tennis.Tests
 		{
 			var namingRules = new DisplayScore.NamingRule[]
 			{
-				() => null,
-				() => null,
+				(rawScore, p1, p2) => null,
+				(rawScore, p1, p2) => null,
 			};
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
 
