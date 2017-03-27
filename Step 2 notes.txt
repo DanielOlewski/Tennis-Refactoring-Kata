@@ -1,6 +1,7 @@
+STEP 1
 1. Could not resist simple rename refactorings while adding UTs. Good habit, right?
-2. The classes I previously refactored out in Step 1 of the excercise - those were the easiest ones to UT. And the first canidate. 
-	And yes - they were missing UTs. One class really: RawScore. That was the only extracted class that I wrote some new/dedicated UTs for back in Step 1. And now more in Step2.
+2. The classes I previously refactored out weeks ago - those were the easiest ones to UT. And the first canidate. 
+	And yes - they were missing UTs. One class really: RawScore. That was the only extracted class that I wrote some new/dedicated UTs. And now more now.
 3. TennisGame tests added. 
 	Discovered a few good missed cases (same player name, unknown player, invalid/empty/null player name).
 	Added UTs & validation for player names passed in to the constructor & to the methods. 
@@ -10,4 +11,8 @@
 5. Testing of individual rules - was unable to do that directly as they were all hidden as private methods. 
 	Realized sets of rules can be independent of the DisplayScore class -> decoupled. Into static methods in a TennisScoreNaming class. Didn't see reason to create multiple classes.
 	Added UTs for each tennis score naming.
-6. 
+
+Per instructions turned off the original tests now. And checked NCrunch metrics: showed 100% product code coverage. With 37 new tests (original had 36 tests).
+	A bit surprised about the coverage, but I guess I was thinking about each unit how to test it best when I was generating the UTs.
+
+STEP 2

@@ -1,8 +1,9 @@
 using NUnit.Framework;
 using Should;
 
-namespace Tennis.Tests
+namespace Tennis.Tests.Original
 {
+	//[Ignore("temoprarily turned off for the excercise")]
 	public class MakingDisplayScore
 	{
 		[TestCase(0, 0, "Love-All")]
@@ -48,7 +49,8 @@ namespace Tennis.Tests
         }
     }
 
-    public class SimulatingRealGame
+	//[Ignore("temoprarily turned off for the excercise")]
+	public class SimulatingRealGame
     {
         [Test]
         public void BallsWonSequenceProducesCorrectDisplayScores()
