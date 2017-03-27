@@ -10,12 +10,12 @@ namespace Tennis
 				NameEqualScore, NameWinOrAdvantageScore, NameLowScore,
 			};
 
-		private static string NameLowScore(RawScore rawScore, string player1Name, string player2Name)
+		public static string NameLowScore(RawScore rawScore, string player1Name, string player2Name)
 		{
-			return LowScoreToTennisScoreName(rawScore.Player1BallsWon) + "-" + LowScoreToTennisScoreName(rawScore.Player2BallsWon);
+			return rawScore.EitherPlayerWonAtLeast4Balls ? null : LowScoreToTennisScoreName(rawScore.Player1BallsWon) + "-" + LowScoreToTennisScoreName(rawScore.Player2BallsWon);
 		}
 
-		private static string NameWinOrAdvantageScore(RawScore rawScore, string player1Name, string player2Name)
+		public static string NameWinOrAdvantageScore(RawScore rawScore, string player1Name, string player2Name)
 		{
 			if (!rawScore.EitherPlayerWonAtLeast4Balls)
 				return null;
@@ -26,7 +26,7 @@ namespace Tennis
 			return winOrAdvantageString + playerAhead;
 		}
 
-		private static string NameEqualScore(RawScore rawScore, string player1Name, string player2Name)
+		public static string NameEqualScore(RawScore rawScore, string player1Name, string player2Name)
 		{
 			return rawScore.PlayerScoresAreEqual ? (rawScore.Player1BallsWon > 2 ? "Deuce" : LowScoreToTennisScoreName(rawScore.Player1BallsWon) + "-All") : null;
 		}
