@@ -27,6 +27,6 @@
 
 
 		public bool PlayerScoresAreEqual => Player1BallsWon == Player2BallsWon;
-		public bool WinBy2Naming => Player1BallsWon >= 4 || Player2BallsWon >= 4;
+		public bool EitherPlayerWonAtLeast4Balls => Player1BallsWon >= 4 || Player2BallsWon >= 4;
 	}
 }

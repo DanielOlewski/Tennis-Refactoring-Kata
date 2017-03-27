@@ -36,7 +36,7 @@ namespace Tennis
 
 		private static string NameWinOrAdvantageScore(RawScore rawScore, string player1Name, string player2Name)
 		{
-			if (!rawScore.WinBy2Naming)
+			if (!rawScore.EitherPlayerWonAtLeast4Balls)
 				return null;
 			var scoreDifference = (int) rawScore.Player1BallsWon - (int) rawScore.Player2BallsWon;
 			var playerAhead = scoreDifference > 0 ? player1Name : player2Name;
