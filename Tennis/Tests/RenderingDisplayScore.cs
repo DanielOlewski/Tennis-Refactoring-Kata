@@ -6,13 +6,13 @@ namespace Tennis.Tests
 {
 	public class RenderingDisplayScore
 	{
-		private const string P1Name = "a";
-		private const string P2Name = "B";
+		private readonly Player P1 = new Player("a");
+		private readonly Player P2 = new Player("B");
 
 		[Test]
 		public void P1Required()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), null, P2Name, null);
+			Action action = () => ScoreBoard.Render(new RawScore(1, 1), null, P2, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -20,7 +20,7 @@ namespace Tennis.Tests
 		[Test]
 		public void P2Required()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, "", null);
+			Action action = () => ScoreBoard.Render(new RawScore(1, 1), P1, null, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -28,7 +28,7 @@ namespace Tennis.Tests
 		[Test]
 		public void PlayerNamesMustBeDifferent()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, P1Name, null);
+			Action action = () => ScoreBoard.Render(new RawScore(1, 1), P1, P1, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -37,9 +37,9 @@ namespace Tennis.Tests
 		[Test]
 		public void SingleRuleEvaluated()
 		{
-			DisplayScore.NamingRule r1 = (rawScore, p1, p2) => "r1";
+			ScoreBoard.NamingRule r1 = (rawScore, p1, p2) => "r1";
 
-			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, new [] { r1 });
+			var renderedScore = ScoreBoard.Render(new RawScore(0, 1), P1, P2, new [] { r1 });
 
 			renderedScore.ShouldEqual("r1");
 		}
@@ -47,12 +47,12 @@ namespace Tennis.Tests
 		[Test]
 		public void WhenFirstRuleHitsNoOtherRulesExecuted()
 		{
-			var namingRules = new DisplayScore.NamingRule[]
+			var namingRules = new ScoreBoard.NamingRule[]
 			{
 				(rawScore, p1, p2) => "r1",
 				(rawScore, p1, p2) => "r2"
 			};
-			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
+			var renderedScore = ScoreBoard.Render(new RawScore(0, 1), P1, P2, namingRules);
 
 			renderedScore.ShouldNotEqual("r2");
 		}
@@ -60,12 +60,12 @@ namespace Tennis.Tests
 		[Test]
 		public void WhenFirstRuleNotHitsOtherRulesExecuted()
 		{
-			var namingRules = new DisplayScore.NamingRule[]
+			var namingRules = new ScoreBoard.NamingRule[]
 			{
 				(rawScore, p1, p2) => null,
 				(rawScore, p1, p2) => "r2"
 			};
-			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
+			var renderedScore = ScoreBoard.Render(new RawScore(0, 1), P1, P2, namingRules);
 
 			renderedScore.ShouldEqual("r2");
 		}
@@ -73,14 +73,14 @@ namespace Tennis.Tests
 		[Test]
 		public void WhenFirstRuleNotHitsOtherRulesExecuted2()
 		{
-			var namingRules = new DisplayScore.NamingRule[]
+			var namingRules = new ScoreBoard.NamingRule[]
 			{
 				(rawScore, p1, p2) => null,
 				(rawScore, p1, p2) => null,
 				(rawScore, p1, p2) => null,
 				(rawScore, p1, p2) => "r2"
 			};
-			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
+			var renderedScore = ScoreBoard.Render(new RawScore(0, 1), P1, P2, namingRules);
 
 			renderedScore.ShouldEqual("r2");
 		}
@@ -88,12 +88,12 @@ namespace Tennis.Tests
 		[Test]
 		public void WhenNoRuleHitsScoreIsUnknown()
 		{
-			var namingRules = new DisplayScore.NamingRule[]
+			var namingRules = new ScoreBoard.NamingRule[]
 			{
 				(rawScore, p1, p2) => null,
 				(rawScore, p1, p2) => null,
 			};
-			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
+			var renderedScore = ScoreBoard.Render(new RawScore(0, 1), P1, P2, namingRules);
 
 			renderedScore.ShouldEqual("<Unknown score>");
 		}

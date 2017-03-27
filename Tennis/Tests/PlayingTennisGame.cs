@@ -12,7 +12,7 @@ namespace Tennis.Tests
 		[Test]
 		public void P1ScoringChangesTheScore()
 		{
-			var game = new TennisGame1(P1Name, P2Name);
+			var game = new TennisGame(P1Name, P2Name);
 			var scoreBeforePoint = game.Score;
 
 			game.WonPoint(P1Name);
@@ -23,7 +23,7 @@ namespace Tennis.Tests
 		[Test]
 		public void StartingScoreDefined()
 		{
-			var game = new TennisGame1(P1Name, P2Name);
+			var game = new TennisGame(P1Name, P2Name);
 
 			game.Score.ShouldNotBeNull();
 		}
@@ -32,7 +32,7 @@ namespace Tennis.Tests
 		[Test]
 		public void P2ScoringChangesTheScore()
 		{
-			var game = new TennisGame1(P1Name, P2Name);
+			var game = new TennisGame(P1Name, P2Name);
 			var scoreBeforePoint = game.Score;
 
 			game.WonPoint(P2Name);
@@ -43,7 +43,7 @@ namespace Tennis.Tests
 		[Test]
 		public void UnknownPlayerScoringNotAllowed()
 		{
-			var game = new TennisGame1(P1Name, P2Name);
+			var game = new TennisGame(P1Name, P2Name);
 
 			Action action = () => game.WonPoint("some other player");
 
@@ -53,7 +53,7 @@ namespace Tennis.Tests
 		[Test]
 		public void SamePlayerNamesNotAllowed()
 		{
-			Action action = () => new TennisGame1(P1Name, P1Name);
+			Action action = () => new TennisGame(P1Name, P1Name);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -61,7 +61,7 @@ namespace Tennis.Tests
 		[Test]
 		public void InvalidP1NameNotAllowed()
 		{
-			Action action = () => new TennisGame1("", P2Name);
+			Action action = () => new TennisGame("", P2Name);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -69,7 +69,7 @@ namespace Tennis.Tests
 		[Test]
 		public void InvalidP2NameNotAllowed()
 		{
-			Action action = () => new TennisGame1(P1Name, null);
+			Action action = () => new TennisGame(P1Name, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}

@@ -5,13 +5,13 @@ namespace Tennis.Tests
 {
 	internal class NamingTennisScores
 	{
-		private const string P1Name = "a";
-		private const string P2Name = "B";
+		private readonly Player P1 = new Player("a");
+		private readonly Player P2 = new Player("B");
 
 		[Test]
 		public void EqualHighScoreNamedDeuce()
 		{
-			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(5, 5), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(5, 5), P1, P2);
 
 			namedScore.ShouldEqual("Deuce");
 		}
@@ -19,7 +19,7 @@ namespace Tennis.Tests
 		[Test]
 		public void EqualLowScoreNamedCorrectly()
 		{
-			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(1, 1), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(1, 1), P1, P2);
 
 			namedScore.ShouldEqual("Fifteen-All");
 		}
@@ -27,7 +27,7 @@ namespace Tennis.Tests
 		[Test]
 		public void EqualScoreRuleSkipsWhenScoresDifferent()
 		{
-			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(1, 2), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameEqualScore(new RawScore(1, 2), P1, P2);
 
 			namedScore.ShouldBeNull();
 		}
@@ -35,7 +35,7 @@ namespace Tennis.Tests
 		[Test]
 		public void LowScoreRuleSkipsWhenScoreHigh()
 		{
-			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(3, 4), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(3, 4), P1, P2);
 
 			namedScore.ShouldBeNull();
 		}
@@ -43,7 +43,7 @@ namespace Tennis.Tests
 		[Test]
 		public void LowScore_15_30()
 		{
-			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(1, 2), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(1, 2), P1, P2);
 
 			namedScore.ShouldEqual("Fifteen-Thirty");
 		}
@@ -51,7 +51,7 @@ namespace Tennis.Tests
 		[Test]
 		public void LowScore_0_40()
 		{
-			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(0, 3), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameLowScore(new RawScore(0, 3), P1, P2);
 
 			namedScore.ShouldEqual("Love-Forty");
 		}
@@ -59,7 +59,7 @@ namespace Tennis.Tests
 		[Test]
 		public void AdvantageRuleSkipsWhenLowScores()
 		{
-			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(1, 3), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(1, 3), P1, P2);
 
 			namedScore.ShouldBeNull();
 		}
@@ -67,7 +67,7 @@ namespace Tennis.Tests
 		[Test]
 		public void AdvantageP1()
 		{
-			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(4, 3), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(4, 3), P1, P2);
 
 			namedScore.ShouldEqual("Advantage a");
 		}
@@ -75,7 +75,7 @@ namespace Tennis.Tests
 		[Test]
 		public void WinP1()
 		{
-			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 3), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 3), P1, P2);
 
 			namedScore.ShouldEqual("Win for a");
 		}
@@ -83,7 +83,7 @@ namespace Tennis.Tests
 		[Test]
 		public void WinP2()
 		{
-			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 7), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 7), P1, P2);
 
 			namedScore.ShouldEqual("Win for B");
 		}
@@ -91,7 +91,7 @@ namespace Tennis.Tests
 		[Test]
 		public void AdvantageP2()
 		{
-			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 6), P1Name, P2Name);
+			var namedScore = TennisScoreNaming.NameWinOrAdvantageScore(new RawScore(5, 6), P1, P2);
 
 			namedScore.ShouldEqual("Advantage B");
 		}

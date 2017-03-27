@@ -43,7 +43,7 @@ namespace Tennis.Tests.Original
 		[TestCase(140, 16, "Win for player-A")]
 		public void RawScoreProducesDisplayScore(int player1Score, int player2Score, string expectedDisplayScore)
         {
-			var displayScore = DisplayScore.Render(new RawScore((uint)player1Score, (uint)player2Score), "player-A", "player-B", TennisScoreNaming.Rules);
+			var displayScore = ScoreBoard.Render(new RawScore((uint)player1Score, (uint)player2Score), new Player("player-A"), new Player("player-B"), TennisScoreNaming.Rules);
 
 			displayScore.ShouldEqual(expectedDisplayScore);
         }
@@ -55,7 +55,7 @@ namespace Tennis.Tests.Original
         [Test]
         public void BallsWonSequenceProducesCorrectDisplayScores()
         {
-            var game = new TennisGame1("player-A", "player-B"); 
+            var game = new TennisGame("player-A", "player-B"); 
             string[] ballWonSequence = { "player-A", "player-A", "player-B", "player-B", "player-A", "player-A" };
             string[] expectedScores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for player-A" };
 

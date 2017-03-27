@@ -16,3 +16,7 @@ Per instructions turned off the original tests now. And checked NCrunch metrics:
 	A bit surprised about the coverage, but I guess I was thinking about each unit how to test it best when I was generating the UTs.
 
 STEP 2
+No new UTs needed based on the above. 
+But a few names I wanted to change based on the ideas in the email thread.
+I also wanted to remove the duplication in player name validation and introduce Player class. This shuould reduce UTs.
+
