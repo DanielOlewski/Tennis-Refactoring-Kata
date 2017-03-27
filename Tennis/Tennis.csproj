@@ -54,6 +54,7 @@
     <Compile Include="Tests\RawScoreCounting.cs" />
     <Compile Include="TennisGame1.cs" />
     <Compile Include="Tests\Original\TennisTests.cs" />
+    <Compile Include="Tests\RenderingDisplayScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

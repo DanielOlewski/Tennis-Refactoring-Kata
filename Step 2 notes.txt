@@ -1,6 +1,6 @@
 1. Could not resist simple rename refactorings while adding UTs. Good habit, right?
-2. The classes I previously refactored out in Step 1 of the excercise - those were the easiest ones to UT. And yes - they were missing UTs.
-	one class really: RawScore. that was the only extracted class that I wrote some new/dedicated UTs for back in Step 1. And now more in Step2.
+2. The classes I previously refactored out in Step 1 of the excercise - those were the easiest ones to UT. And the first canidate. 
+	And yes - they were missing UTs. One class really: RawScore. That was the only extracted class that I wrote some new/dedicated UTs for back in Step 1. And now more in Step2.
 3. TennisGame tests added. 
 	Discovered a few good missed cases (same player name, unknown player, invalid/empty/null player name).
 	Added UTs & validation for player names passed in to the constructor & to the methods. 

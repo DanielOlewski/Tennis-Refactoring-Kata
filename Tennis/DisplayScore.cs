@@ -4,7 +4,7 @@ namespace Tennis
 {
 	internal static class DisplayScore
 	{
-		private delegate string NamingRule();
+		public delegate string NamingRule();
 
 		public static string Render(RawScore rawScore, string player1Name, string player2Name)
 		{
@@ -14,7 +14,23 @@ namespace Tennis
 				() => NameWinOrAdvantageScore(rawScore, player1Name, player2Name),
 				() => NameLowScore(rawScore),
 			};
-			return RunRules(namingRuleSequence);
+			return Render(rawScore, player1Name, player2Name, namingRuleSequence);
+		}
+
+
+		public static string Render(RawScore rawScore, string player1Name, string player2Name, NamingRule[] rules)
+		{
+			if (string.IsNullOrEmpty(player1Name) || string.IsNullOrEmpty(player2Name))
+			{
+				throw new ArgumentException("Player names must be provided!");
+			}
+
+			if (player1Name == player2Name)
+			{
+				throw new ArgumentException("Player names must be different!");
+			}
+
+			return RunRules(rules);
 		}
 
 		private static string RunRules(NamingRule[] namingRuleSequence)
