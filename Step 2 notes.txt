@@ -1,0 +1,3 @@
+1. Could not resist simple rename refactorings while adding UTs. Good habit, right?
+2. The classes I previously refactored out in Step 1 of the excercise - those were the easiest ones to UT. And yes - they were missing UTs.
+3. 
