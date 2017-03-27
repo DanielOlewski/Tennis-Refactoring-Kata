@@ -60,7 +60,7 @@ namespace Tennis.Tests
             for (var i = 0; i < expectedScores.Length; i++)
             {
                 game.WonPoint(ballWonSequence[i]);
-                expectedScores[i].ShouldEqual(game.GetScore());
+                expectedScores[i].ShouldEqual(game.Score);
             }
         }
     }
