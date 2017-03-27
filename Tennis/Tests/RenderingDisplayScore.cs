@@ -12,7 +12,7 @@ namespace Tennis.Tests
 		[Test]
 		public void P1Required()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), null, P2Name);
+			Action action = () => DisplayScore.Render(new RawScore(1, 1), null, P2Name, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -20,7 +20,7 @@ namespace Tennis.Tests
 		[Test]
 		public void P2Required()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, "");
+			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, "", null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -28,7 +28,7 @@ namespace Tennis.Tests
 		[Test]
 		public void PlayerNamesMustBeDifferent()
 		{
-			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, P1Name);
+			Action action = () => DisplayScore.Render(new RawScore(1, 1), P1Name, P1Name, null);
 
 			action.ShouldThrow<ArgumentException>();
 		}
@@ -54,7 +54,7 @@ namespace Tennis.Tests
 			};
 			var renderedScore = DisplayScore.Render(new RawScore(0, 1), P1Name, P2Name, namingRules);
 
-			renderedScore.ShouldEqual("r1");
+			renderedScore.ShouldNotEqual("r2");
 		}
 
 		[Test]

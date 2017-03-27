@@ -45,7 +45,7 @@ namespace Tennis
             }
         }
 
-		public string Score => DisplayScore.Render(rawScore, player1Name, player2Name);
+		public string Score => DisplayScore.Render(rawScore, player1Name, player2Name, TennisScoreNaming.Rules);
     }
 }
 

@@ -50,6 +50,7 @@
     <Compile Include="DisplayScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawScore.cs" />
+    <Compile Include="TennisScoreNaming.cs" />
     <Compile Include="Tests\PlayingTennisGame.cs" />
     <Compile Include="Tests\RawScoreCounting.cs" />
     <Compile Include="TennisGame1.cs" />
