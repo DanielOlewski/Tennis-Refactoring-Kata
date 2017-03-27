@@ -8,6 +8,6 @@
 4. DisplayScore - UTs for validation, then for rendering, covered one missing case I couldn't get to before (unknown score).
 	Had to enable passing in an array of rules into the DisplayScore.Render() so that I can pass in test rules.
 5. Testing of individual rules - was unable to do that directly as they were all hidden as private methods. 
-	Realized sets of rules can be independent of the DisplayScore class -> decoupled.
+	Realized sets of rules can be independent of the DisplayScore class -> decoupled. Into static methods in a TennisScoreNaming class. Didn't see reason to create multiple classes.
 	Added UTs for each tennis score naming.
 6. 
